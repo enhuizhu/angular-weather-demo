@@ -1,5 +1,4 @@
 import { AppPage } from './app.po';
-import { async } from 'q';
 
 describe('angular-weather App', () => {
   let page: AppPage;
