@@ -2,9 +2,10 @@
 
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, catchError } from 'rxjs/operators';
 import { WeatherService } from '../../weather.service';
-import { GET_DATA, ReceiveWeatherData } from '../actions/weather'; 
+import { GET_DATA, ReceiveWeatherData, ERROR, RequestError } from '../actions/weather'; 
+import { of } from 'rxjs/observable/of';
 
 
 @Injectable()
@@ -15,7 +16,11 @@ export class WeatherEffects {
     mergeMap((action: any) => 
       this.weatherService.searchWeatherForCity(action.payload)
       .pipe(
-        map(weather =>(new ReceiveWeatherData(weather)))
+        map(weather =>(new ReceiveWeatherData(weather))),
+        catchError(error => {
+          alert(error.error.message);
+          return of(new RequestError(error));
+        })
       )
     )
   );
