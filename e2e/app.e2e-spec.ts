@@ -1,4 +1,5 @@
 import { AppPage } from './app.po';
+import { async } from 'q';
 
 describe('angular-weather App', () => {
   let page: AppPage;
@@ -7,7 +8,14 @@ describe('angular-weather App', () => {
     page = new AppPage();
   });
 
-  it('e2e are running empty, please implement', () => {
-    expect(page);
+  it('check page text', async () => {
+    await page.navigateTo();
+    expect(page.getParagraphText()).toBe('AgileSphere coding test - The Weather App');
+  });
+
+  it('check search function', async () => {
+    page.changeInput();
+    await page.search();
+    expect(page.getTable()).toBeTruthy();
   });
 });
