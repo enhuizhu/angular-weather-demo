@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
 import { WeatherService } from '../../weather.service';
-import { GET_DATA, RECEIVE_DATA } from '../actions/weather'; 
+import { GET_DATA, ReceiveWeatherData } from '../actions/weather'; 
 
 
 @Injectable()
@@ -15,7 +15,7 @@ export class WeatherEffects {
     mergeMap((action: any) => 
       this.weatherService.searchWeatherForCity(action.payload)
       .pipe(
-        map(weather =>({type: RECEIVE_DATA, payload: weather}))
+        map(weather =>(new ReceiveWeatherData(weather)))
       )
     )
   );
