@@ -9,4 +9,9 @@ export class ReceiveWeatherData implements Action {
   constructor(public payload: Weather) {}
 }
 
-export type Actions = ReceiveWeatherData;
+export class RequestWeatherData implements Action {
+  readonly type = GET_DATA;
+  constructor(public payload: string){}
+}
+
+export type Actions = ReceiveWeatherData | RequestWeatherData;

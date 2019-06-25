@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
-import { GET_DATA } from './store/actions/weather';
 import { Observable } from 'rxjs';
 import { Weather } from '../model/weather';
+import { RequestWeatherData } from './store/actions/weather';
 
 @Component({
   selector: 'app-weather',
@@ -20,7 +20,6 @@ export class WeatherContainer {
   }
 
   citySearch(e) {
-    // TO BE IMPLMENTED
-    this.store.dispatch({type: GET_DATA, payload: e});
+    this.store.dispatch(new RequestWeatherData(e));
   }
 }

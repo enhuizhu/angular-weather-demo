@@ -1,6 +1,6 @@
 import { FormatTimePipe } from './format-time.pipe';
 
-fdescribe('FormatTimePipe', () => {
+describe('FormatTimePipe', () => {
   it('create an instance', () => {
     const pipe = new FormatTimePipe();
     expect(pipe).toBeTruthy();
